@@ -4,24 +4,28 @@
 
 This project implements a **sequence intelligence system using Recurrent Neural Networks (RNNs)** to predict stock prices from historical time-series data.
 
-The objective is to model temporal patterns in financial data using **Long Short-Term Memory (LSTM)** and **Gated Recurrent Unit (GRU)** architectures and evaluate their ability to forecast future price movements.
+The goal is to learn temporal dependencies in financial data and forecast future stock prices using two deep learning architectures:
 
-The system learns from past stock prices and predicts future values while analyzing model performance through multiple evaluation metrics.
+- **Long Short-Term Memory (LSTM)**
+- **Gated Recurrent Unit (GRU)**
 
----
-
-## 🎯 Problem Statement
-
-Financial markets produce sequential data where current prices depend on historical trends.  
-The goal of this project is to **predict the next closing price of a stock using historical price sequences**.
-
-This task is formulated as a **time-series regression problem**, where the model uses a sequence of past prices to estimate the next price value.
+The models are trained on historical stock price sequences and evaluated using multiple regression metrics.
 
 ---
 
-## 📂 Dataset
+# 🎯 Problem Statement
 
-The dataset contains historical stock price information with the following features:
+Financial markets produce sequential data where current prices depend on past trends.
+
+The objective of this project is to **predict the next closing price using previous price sequences**.
+
+This is formulated as a **time-series regression problem**.
+
+---
+
+# 📂 Dataset
+
+The dataset contains historical stock market data including:
 
 - Date
 - Open price
@@ -30,63 +34,56 @@ The dataset contains historical stock price information with the following featu
 - Close price
 - Volume
 
-For this project, the **closing price** is used as the target variable since it represents the final trading value of the stock for each day.
+The **Close price** is used as the prediction target.
 
 ---
 
-## 🔧 Data Preprocessing
+# 🔧 Data Preprocessing
 
-Several preprocessing steps were applied before training the models:
+The following preprocessing steps were applied:
 
 - Sorting the dataset chronologically
-- Selecting the **Close price** as the prediction target
-- Handling missing values
-- Scaling the data using **MinMaxScaler**
-- Creating sequential input windows for time-series modeling
+- Selecting the **Close price**
+- Scaling data using **MinMaxScaler**
+- Creating sequential windows for time-series modeling
 
 ---
 
-## 🔄 Sequence Windowing
+# 🔄 Sequence Windowing
 
-Time-series models require sequential input data.
-
-A **sliding window approach** is used to create sequences:
-
-```
-Previous N days → Predict next day price
-```
+Time-series data is converted into supervised learning sequences using a **sliding window approach**.
 
 Example:
 
 ```
-[Price₁, Price₂, Price₃ ... Price₁₀₀] → Predict Price₁₀₁
+Previous 30 days → Predict next day price
 ```
 
-This allows the model to capture temporal dependencies in the data.
+This allows the neural network to capture temporal patterns.
 
 ---
 
-## 🧠 Models Implemented
+# 🧠 Models Implemented
 
-Two recurrent neural network architectures were implemented.
+Two recurrent architectures were implemented.
 
-### 1️⃣ Long Short-Term Memory (LSTM)
+## 1️⃣ Long Short-Term Memory (LSTM)
 
-LSTM networks are designed to capture **long-term dependencies** in sequential data.
+LSTM networks capture **long-term dependencies in sequential data**.
 
-Key components:
+Architecture components:
 
 - LSTM layers
-- Dropout layers for regularization
+- Dropout layers
 - Dense output layer
 
 ---
 
-### 2️⃣ Gated Recurrent Unit (GRU)
+## 2️⃣ Gated Recurrent Unit (GRU)
 
-GRU is a simplified version of LSTM that often trains faster while maintaining similar predictive performance.
+GRU is a simplified version of LSTM with fewer parameters.
 
-Key components:
+Architecture components:
 
 - GRU layers
 - Dropout regularization
@@ -94,98 +91,103 @@ Key components:
 
 ---
 
-## ⚙️ Training Strategy
+# ⚙️ Training Strategy
 
-The models were trained using the following configuration:
+Training configuration:
 
-Optimizer:  
+Optimizer:
+
 ```
 Adam
 ```
 
-Loss Function:  
+Loss Function:
+
 ```
 Mean Squared Error (MSE)
 ```
 
-Training Techniques:
+Regularization techniques:
 
-- Early stopping to prevent overfitting
-- Validation monitoring during training
+- Dropout layers
+- Early stopping
 
----
-
-## 📊 Model Evaluation Metrics
-
-Model performance was evaluated using regression metrics:
-
-**Mean Absolute Error (MAE)**  
-Measures the average absolute difference between predicted and actual values.
-
-**Mean Squared Error (MSE)**  
-Penalizes larger prediction errors more heavily.
-
-**R-squared (R²)**  
-Measures how well the model explains the variance in the data.
-
-**Directional Accuracy**  
-Evaluates whether the model correctly predicts the **direction of price movement** (up or down).
+These help prevent **overfitting**.
 
 ---
 
-## 🔬 Architecture Comparison: LSTM vs GRU
+# 📊 Model Evaluation Metrics
 
-Both models were evaluated on the same dataset to compare their performance.
+The models were evaluated using:
+
+- **MAE (Mean Absolute Error)**
+- **MSE (Mean Squared Error)**
+- **R² Score**
+- **Directional Accuracy**
+
+---
+
+# 🔬 Architecture Comparison: LSTM vs GRU
 
 | Model | MAE | R² Score |
 |------|------|------|
-| LSTM | *computed in notebook* | *computed in notebook* |
-| GRU | *computed in notebook* | *computed in notebook* |
+| LSTM | 9.25 | 0.895 |
+| GRU | 5.86 | 0.961 |
 
-The comparison helps determine which architecture better captures temporal patterns in financial data.
+### Observation
+
+The **GRU model achieved lower error and higher R² score**, indicating better performance on this dataset.
 
 ---
 
-## 🧪 Ablation Study: Window Size Experiment
+# 🧪 Ablation Study: Window Size Experiment
 
-To analyze how historical context affects prediction accuracy, two sequence lengths were tested.
+Two sequence window sizes were tested to evaluate the effect of historical context.
 
 | Window Size | MAE | R² |
 |-------------|------|------|
-| 100 Days | *computed in notebook* | *computed in notebook* |
-| 30 Days | *computed in notebook* | *computed in notebook* |
+| 100 Days | 5.84 | 0.960 |
+| 30 Days | 5.26 | 0.968 |
 
-Longer windows allow the model to capture deeper temporal patterns but increase training complexity.
+### Observation
 
----
-
-## 📈 Prediction Visualization
-
-The model predictions are compared against actual stock prices.
-
-Example visualization:
-
-```
-Actual Price vs Predicted Price
-```
-
-This helps evaluate how closely the model follows real market trends.
+The **30-day window produced slightly better performance**, suggesting that shorter historical context was sufficient for capturing relevant temporal patterns.
 
 ---
 
-## ⚠️ Error Analysis
+# 📈 Training Loss Curve
 
-Prediction errors were analyzed using residual distributions.
+This graph shows the training and validation loss during model training.
 
-Key observations:
-
-- The model performs well during stable price periods.
-- Larger prediction errors occur during sudden price spikes or drops.
-- Financial markets contain noise that is difficult for purely historical models to capture.
+![Loss Curve](Images/loss_curve.png)
 
 ---
 
-## 📂 Repository Structure
+# 📊 Model Architecture Comparison
+
+Visualization comparing performance of LSTM and GRU models.
+
+![LSTM vs GRU](Images/lstm_vs_gru.png)
+
+---
+
+# 📉 Prediction Visualization
+
+Actual stock prices vs predicted prices.
+
+![Prediction Plot](Images/prediction_plot.png)
+
+---
+
+# ⚠️ Prediction Error Analysis
+
+Error distribution of the model predictions.
+
+![Prediction Error](Images/prediction_error.png)
+
+---
+
+# 📂 Repository Structure
 
 ```
 ACM-TASKS
@@ -197,21 +199,22 @@ ACM-TASKS
 │   │
 │   └── Images
 │        ├── loss_curve.png
-│        ├── prediction_plot.png
-│        └── error_distribution.png
+│        ├── lstm_vs_gru.png
+│        ├── prediction_error.png
+│        └── prediction_plot.png
 ```
 
 ---
 
-## 🛠 Requirements
+# 🛠 Requirements
 
-Install dependencies using:
+Install dependencies:
 
 ```
 pip install -r requirements.txt
 ```
 
-Main libraries used:
+Main libraries:
 
 - TensorFlow / Keras
 - NumPy
@@ -221,15 +224,7 @@ Main libraries used:
 
 ---
 
-## 🚀 Future Improvements
+# 👤 Author
 
-Possible improvements include:
-
-- Incorporating additional financial indicators
-- Using attention-based sequence models
-- Multi-step time-series forecasting
-- Integrating external economic signals
-
----
-
-
+**Pavan Sai**  
+Artificial Intelligence & Data Science Student
