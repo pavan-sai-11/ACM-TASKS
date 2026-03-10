@@ -8,8 +8,8 @@ The objective is to automatically detect and categorize different types of surfa
 
 Two CNN architectures were implemented and compared:
 
-- Baseline CNN Model
-- Regularized CNN Model
+- Baseline CNN Model  
+- Regularized CNN Model  
 
 The final system classifies images into **six defect categories**.
 
@@ -31,38 +31,38 @@ The project uses the **NEU Surface Defect Dataset**, a widely used dataset for i
 
 ### Defect Classes
 
-- Crazing
-- Inclusion
-- Patches
-- Pitted Surface
-- Rolled-in Scale
-- Scratches
+- Crazing  
+- Inclusion  
+- Patches  
+- Pitted Surface  
+- Rolled-in Scale  
+- Scratches  
 
 ### Image Properties
 
-- Image size: 128 × 128
-- Number of classes: 6
+- Image size: **128 × 128**
+- Number of classes: **6**
 - Images resized and normalized before training
 
 ---
 
 ## 🔧 Data Preprocessing
 
-The following preprocessing steps were applied:
+The following preprocessing steps were applied before training the CNN model:
 
-- Image resizing to 128 × 128
-- Pixel value normalization using Rescaling (1/255)
-- Dataset batching using TensorFlow
-- Train–Validation split for evaluation
+- Image resizing to **128 × 128**
+- Pixel value normalization using **Rescaling (1/255)**
+- Efficient dataset loading using TensorFlow
+- Train–Validation split for model evaluation
 
 ---
 
 ## 🔄 Data Augmentation
 
-To improve generalization and reduce overfitting, the following augmentation techniques were applied:
+To improve generalization and reduce overfitting, data augmentation techniques were applied:
 
-- Random horizontal flipping
-- Random rotation
+- Random horizontal flipping  
+- Random rotation  
 
 These transformations help the model learn invariant visual patterns.
 
@@ -70,30 +70,33 @@ These transformations help the model learn invariant visual patterns.
 
 ## 🧠 Model Architecture
 
-The CNN architecture extracts spatial features from input images using convolutional layers followed by pooling operations.
+The CNN architecture extracts hierarchical visual features using convolutional layers followed by pooling operations.
 
 Key architectural components include:
 
-- Convolutional Layers
-- Batch Normalization
-- ReLU Activation
-- MaxPooling Layers
-- Global Average Pooling
-- Dropout Regularization
-- Dense Classification Layer
+- Convolutional Layers  
+- Batch Normalization  
+- ReLU Activation  
+- MaxPooling Layers  
+- Global Average Pooling  
+- Dropout Regularization  
+- Dense Classification Layer  
 
-### Architecture Diagram
+### Model Architecture Diagram
 
-![Model Architecture](model_architecture.png)
+![Model Architecture](Images/model_architecture.png)
 
 ---
 
 ## ⚙️ Training Configuration
 
-Optimizer: Adam  
-Learning Rate: 0.0003  
-Loss Function: Sparse Categorical Crossentropy  
-Evaluation Metric: Accuracy  
+Optimizer: **Adam**
+
+Learning Rate: **0.0003**
+
+Loss Function: **Sparse Categorical Crossentropy**
+
+Evaluation Metric: **Accuracy**
 
 ---
 
@@ -101,15 +104,15 @@ Evaluation Metric: Accuracy
 
 ### Baseline CNN Model
 
-A standard CNN architecture used as a reference model.
+A standard convolutional architecture used as a reference model to establish baseline performance.
 
 ### Regularized CNN Model
 
 This improved architecture includes:
 
-- Data augmentation
-- Batch normalization
-- Dropout layers
+- Data augmentation  
+- Batch normalization  
+- Dropout regularization  
 
 These techniques help improve generalization and reduce overfitting.
 
@@ -117,16 +120,16 @@ These techniques help improve generalization and reduce overfitting.
 
 ## 📊 Model Evaluation
 
-The model was evaluated using:
+Model performance was evaluated using multiple metrics:
 
-- Accuracy
-- Confusion Matrix
-- Training & Validation Accuracy Curves
-- Training & Validation Loss Curves
+- Accuracy  
+- Confusion Matrix  
+- Training and Validation Accuracy Curves  
+- Training and Validation Loss Curves  
 
 ### Confusion Matrix
 
-![Confusion Matrix](confusion_matrix.png)
+![Confusion Matrix](Images/confusion_matrix.png)
 
 ---
 
@@ -134,27 +137,27 @@ The model was evaluated using:
 
 ### Accuracy Curve
 
-![Accuracy Curve](accuracy_curve.png)
+![Accuracy Curve](Images/accuracy_curve.png)
 
 ### Loss Curve
 
-![Loss Curve](loss_curve.png)
+![Loss Curve](Images/loss_curve.png)
 
 ### Validation Accuracy Comparison
 
-![Validation Accuracy](validation_accuracy_comparison.png)
+![Validation Accuracy](Images/validation_accuracy_comparison.png)
 
 ---
 
 ## 🔍 Model Explainability (Grad-CAM)
 
-Grad-CAM (Gradient-weighted Class Activation Mapping) was used to visualize which regions of the image influenced the model's prediction.
+Grad-CAM (Gradient-weighted Class Activation Mapping) was used to visualize which regions of the image influenced the model’s prediction.
 
-This helps interpret how the CNN model focuses on defect regions.
+This helps interpret CNN decisions by highlighting important image regions.
 
 ### Grad-CAM Visualization
 
-![GradCAM](gradcam_visualization.png)
+![GradCAM](Images/gradcam_visualization.png)
 
 ---
 
@@ -162,20 +165,30 @@ This helps interpret how the CNN model focuses on defect regions.
 
 Misclassified images were analyzed to understand model weaknesses and confusion between visually similar defect types.
 
+This analysis helps identify:
+
+- visually similar defects  
+- difficult classification cases  
+- dataset ambiguities  
+
 ---
 
 ## 📂 Repository Structure
 
+```
 CNN-Steel-Defect-Classification
 │
 ├── notebook.ipynb
-├── model_architecture.png
-├── confusion_matrix.png
-├── accuracy_curve.png
-├── loss_curve.png
-├── validation_accuracy_comparison.png
-├── gradcam_visualization.png
-└── README.md
+├── README.md
+│
+└── Images
+     ├── model_architecture.png
+     ├── confusion_matrix.png
+     ├── accuracy_curve.png
+     ├── loss_curve.png
+     ├── validation_accuracy_comparison.png
+     └── gradcam_visualization.png
+```
 
 ---
 
@@ -183,29 +196,33 @@ CNN-Steel-Defect-Classification
 
 Install dependencies using:
 
+```
 pip install -r requirements.txt
+```
 
 Main libraries used:
 
-- TensorFlow / Keras
-- NumPy
-- Matplotlib
-- Seaborn
-- OpenCV
-- Scikit-learn
+- TensorFlow / Keras  
+- NumPy  
+- Matplotlib  
+- Seaborn  
+- OpenCV  
+- Scikit-learn  
 
 ---
 
 ## 🚀 Future Improvements
 
-- Apply transfer learning models (ResNet, EfficientNet)
-- Increase dataset size using advanced augmentation
-- Hyperparameter tuning
-- Deploy model as a web application
+Potential improvements for this project include:
+
+- Applying transfer learning models such as ResNet or EfficientNet  
+- Increasing dataset size using advanced augmentation  
+- Hyperparameter optimization  
+- Deploying the model as a web-based inspection tool  
 
 ---
 
 ## 👤 Author
 
-Pavan Sai  
+**Pavan Sai**  
 Artificial Intelligence & Data Science Student
