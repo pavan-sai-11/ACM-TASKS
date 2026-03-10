@@ -232,7 +232,4 @@ Possible improvements include:
 
 ---
 
-## 👤 Author
 
-**Pavan Sai**  
-Artificial Intelligence & Data Science Student
