@@ -227,5 +227,5 @@ Possible improvements for this project include:
 
 ## 👤 Author
 
-**Pavan Sai**  
+**N. Pavan Sai**  
 Artificial Intelligence & Data Science Student
