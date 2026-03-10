@@ -25,13 +25,13 @@ This is a **multi-class image classification problem**.
 
 ---
 
-## 📂 Dataset Description
+## 📂 Dataset
 
-The project uses the **NEU Surface Defect Dataset**, commonly used for industrial defect detection research.
+This project uses the **NEU Surface Defect Dataset**, a publicly available dataset used for research in industrial surface defect detection.
+
+The dataset contains grayscale images of steel surface defects categorized into six classes.
 
 ### Defect Classes
-
-The dataset contains six categories:
 
 - Crazing
 - Inclusion
@@ -39,6 +39,20 @@ The dataset contains six categories:
 - Pitted Surface
 - Rolled-in Scale
 - Scratches
+
+### Image Details
+
+- Image size: 200 × 200 pixels (resized to 128 × 128 for training)
+- Number of classes: 6
+- Each class contains approximately 300 images
+
+### Dataset Download
+
+The dataset can be downloaded from:
+
+https://github.com/abin24/NEU-Surface-Defect-Dataset
+
+After downloading, organize the dataset as follows:
 
 ### Image Properties
 
